@@ -7,12 +7,15 @@ export default class NotesView {
         this.onNoteDelete = onNoteDelete;
         this.root.innerHTML = `
             <div class="notes__sidebar">
-                <button class="notes__add" type="button">Add Note</button>
+                <div class="notes__header">
+                    <h1>Smart Notes</h1>
+                    <button class="notes__add" type="button">+ Add Note</button>
+                </div>
                 <div class="notes__list"></div>
             </div>
             <div class="notes__preview">
-                <input class="notes__title" type="text" placeholder="New Note...">
-                <textarea class="notes__body">Take Note...</textarea>
+                <input class="notes__title" type="text" placeholder="Untitled Note...">
+                <textarea class="notes__body" placeholder="Write your thoughts here..."></textarea>
             </div>
         `;
 
@@ -49,6 +52,7 @@ export default class NotesView {
                 <div class="notes__small-updated">
                     ${updated.toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" })}
                 </div>
+                <button class="notes__delete-btn" type="button">×</button>
             </div>
         `;
     }
@@ -67,15 +71,23 @@ export default class NotesView {
 
         // Add select/delete events for each list item
         notesListContainer.querySelectorAll(".notes__list-item").forEach(noteListItem => {
-            noteListItem.addEventListener("click", () => {
-                this.onNoteSelect(noteListItem.dataset.noteId);
+            noteListItem.addEventListener("click", (e) => {
+                // Don't trigger selection when clicking delete button
+                if (!e.target.classList.contains('notes__delete-btn')) {
+                    this.onNoteSelect(noteListItem.dataset.noteId);
+                }
             });
+        });
 
-            noteListItem.addEventListener("dblclick", () => {
+        // Add delete button handlers
+        notesListContainer.querySelectorAll(".notes__delete-btn").forEach(deleteButton => {
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation(); // Prevent the click from bubbling up to the note item
+                const noteId = deleteButton.closest(".notes__list-item").dataset.noteId;
                 const doDelete = confirm("Are you sure you want to delete this note?");
-
+                
                 if (doDelete) {
-                    this.onNoteDelete(noteListItem.dataset.noteId);
+                    this.onNoteDelete(noteId);
                 }
             });
         });
