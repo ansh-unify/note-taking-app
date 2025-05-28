@@ -1,11 +1,11 @@
 :root {
-    --primary-color: #2c3e50;
+    --primary-color: #e2e8f0;
     --secondary-color: #3498db;
     --background-color: hsl(227, 30%, 37%);
-    --sidebar-color: #ffffff;
-    --text-color: #2c3e50;
-    --border-color: #e1e1e1;
-    --hover-color: #edf2f7;
+    --sidebar-color: #1a202c;
+    --text-color: #e2e8f0;
+    --border-color: #2d3748;
+    --hover-color: #2d3748;
 }
 
 html,
@@ -37,11 +37,12 @@ body {
 .notes__header {
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+    background: #1a202c;
 }
 
 .notes__header h1 {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--text-color);
     margin: 0 0 1rem 0;
     font-weight: 600;
 }
@@ -72,7 +73,7 @@ body {
 .notes__list-item {
     cursor: pointer;
     position: relative;
-    background: white;
+    background: #2d3748;
     padding: 1rem;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -82,30 +83,33 @@ body {
 
 .notes__list-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: #374151;
+    border-color: var(--secondary-color);
 }
 
 .notes__list-item--selected {
-    background: var(--hover-color);
+    background: #374151;
     border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px var(--secondary-color);
 }
 
 .notes__small-title {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .notes__small-body {
     font-size: 0.9rem;
-    color: #666;
+    color: #a0aec0;
     margin-bottom: 0.5rem;
     line-height: 1.4;
 }
 
 .notes__small-updated {
-    color: #888;
+    color: #718096;
     font-size: 0.8rem;
     text-align: right;
 }
